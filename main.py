@@ -1,12 +1,8 @@
-import pygame
 import time
 import platform
 from os import listdir
+import pygame
 
-your_OS = platform.system()
-
-# if your_OS == 'Windows':
-# print(pygame.display.get_wm_info()['window'])
 
 pygame.init()
 
@@ -24,7 +20,7 @@ background = pygame.image.load('background.png')
 mydir = './devils'
 devils = [f for f in listdir(mydir) if f[-4:] == '.png']
 sprite_idx = devils.index('Lucifer.png')
-sprite = pygame.image.load(f'{mydir}\\{devils[sprite_idx]}')
+sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
 
 shut_down = False
 frame = True
@@ -40,11 +36,11 @@ while not shut_down:
             if event.key == pygame.K_RIGHT:
                 sprite_idx = sprite_idx + 1 if sprite_idx + \
                     1 <= len(devils) - 1 else 0
-                sprite = pygame.image.load(f'{mydir}\\{devils[sprite_idx]}')
+                sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
             if event.key == pygame.K_LEFT:
                 sprite_idx = sprite_idx - \
                     1 if sprite_idx >= 1 else len(devils) - 1
-                sprite = pygame.image.load(f'{mydir}\\{devils[sprite_idx]}')
+                sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
 
         if event.type == pygame.MOUSEBUTTONUP:
             if frame:
