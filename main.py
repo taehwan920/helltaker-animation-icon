@@ -1,31 +1,34 @@
 import pygame
 import time
+import platform
 from os import listdir
-# from os.path import isfile, join
+
+your_OS = platform.system()
+
+# if your_OS == 'Windows':
+# print(pygame.display.get_wm_info()['window'])
 
 pygame.init()
 
-SCREEN_X = 150
-SCREEN_Y = 150
+SCREEN_X, SCREEN_Y = 150, 150
 screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 
-SPRT_start_X = 0
-SPRT_start_Y = 0
-
-SPRT_end_X = 150
-SPRT_end_Y = 150
-
-mydir = 'C:\\Users\\taehw\\Documents\\helltaker-animation-icon\\devils'
-devils = [f for f in listdir(mydir) if f[-4:] == '.png']
+SPRT_start_X, SPRT_start_Y = 0, 0
+SPRT_end_X, SPRT_end_Y = 150, 150
 
 pygame.display.set_caption('Cute Luciper!')
+mini_icon = pygame.image.load('Lucifer_mini.png')
+pygame.display.set_icon(mini_icon)
 background = pygame.image.load('background.png')
+
+mydir = './devils'
+devils = [f for f in listdir(mydir) if f[-4:] == '.png']
 sprite_idx = devils.index('Lucifer.png')
 sprite = pygame.image.load(f'{mydir}\\{devils[sprite_idx]}')
-# sprite = pygame.image.load(f'{mydir}\\Azazel.png')
 
 shut_down = False
 frame = True
+
 while not shut_down:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
