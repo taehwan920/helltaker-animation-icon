@@ -1,6 +1,5 @@
 import time
-import platform
-from os import listdir
+import os
 import pygame
 
 
@@ -12,13 +11,15 @@ screen = pygame.display.set_mode((SCREEN_X, SCREEN_Y))
 SPRT_start_X, SPRT_start_Y = 0, 0
 SPRT_end_X, SPRT_end_Y = 150, 150
 
-pygame.display.set_caption('Cute Luciper!')
-mini_icon = pygame.image.load('Lucifer_mini.png')
+image_folder = os.path.join(os.path.dirname(__file__), 'images')
+print(image_folder)
+pygame.display.set_caption('Cute Lucifer!')
+mini_icon = pygame.image.load(os.path.join(image_folder, 'Lucifer_mini.png'))
 pygame.display.set_icon(mini_icon)
-background = pygame.image.load('background.png')
+background = pygame.image.load(os.path.join(image_folder, 'background.png'))
 
-mydir = './devils'
-devils = [f for f in listdir(mydir) if f[-4:] == '.png']
+mydir = os.path.join(os.path.dirname(__file__), 'images/devils')
+devils = [f for f in os.listdir(mydir) if f[-4:] == '.png']
 sprite_idx = devils.index('Lucifer.png')
 sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
 
@@ -37,10 +38,12 @@ while not shut_down:
                 sprite_idx = sprite_idx + 1 if sprite_idx + \
                     1 <= len(devils) - 1 else 0
                 sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
+                pygame.display.set_caption(f'Cute {devils[sprite_idx][:-4]}!')
             if event.key == pygame.K_LEFT:
                 sprite_idx = sprite_idx - \
                     1 if sprite_idx >= 1 else len(devils) - 1
                 sprite = pygame.image.load(f'{mydir}/{devils[sprite_idx]}')
+                pygame.display.set_caption(f'Cute {devils[sprite_idx][:-4]}!')
 
         if event.type == pygame.MOUSEBUTTONUP:
             if frame:
